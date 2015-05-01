@@ -86,4 +86,8 @@ void V_uxUyFromUz(Vector u_z, Vector *u_x, Vector *u_y);
 // et que les vecteurs (uy,uz) soient dans le même plan que les
 // vecteurs ((0,1,0),uz) sauf si uz est lui même colinéaire à (0,1,0).
 
+Vector V_rotate(Vector p, Vector centre, Vector v1, Vector v2);
+// Cette fonction opère sur le point p une rotation autour de centre
+// et qui transforme le vecteur v1 en vecteur v2.
+
 #endif // __VECTOR_H__
