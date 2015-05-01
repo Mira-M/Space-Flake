@@ -73,9 +73,12 @@ double V_length(Vector v);
 Vector V_unit(Vector v);
 // retourne un vecteur colinéaire à v mais de longueur 1
 
-Vector V_tournerAutourDeLAxeY(Vector p, double radians);
-// Tourne d'un angle de radians le point  p autour de l'axe Y
-// et retourne le résultat.
+Vector V_turnAroundY(Vector p, double r);
+// Tourne d'un angle de r radians le point  p autour de l'axe Y et
+// retourne le résultat. 
+// Donnez-vous le  temps de réfléchir. Ca n'a  rien d'immédiat.
+// Dans un premier temps, vous pouvez considérer que p est sur l'axe des
+// abscisses.
 
 double V_decompose(Vector p, Vector u);
 // Si (u,v,w) est un repère orthonormé de l'espace, chaque vecteur p

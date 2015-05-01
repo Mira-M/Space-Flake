@@ -15,6 +15,7 @@
 
 #include "Vector.h"
 #include "Polygon.h"
+#include "Perlin.h"
 
 #define M_MAX_QUADS 5000
 
@@ -55,5 +56,8 @@ void M_revolution(Mesh *M, Polygon *P, int nb_tranches);
 // A partir d'un polygone P, cette fonction divise 2*pi en
 // nb_tranches angles et ajoute à M les quads nécessaires pour
 // réaliser une révolution de P autour de l'axe Y (cf figure 1).
+
+void M_perlinExtrude(Mesh *M, Polygon *p, int nb_slices);
+// Extrusion
 
 #endif // __MESH_H__

@@ -23,6 +23,10 @@ typedef struct
 	int is_filled;
 	int is_convex;
 } Polygon;
+// is_convex can take 3 values :
+// - if is_convex == 0, the polygon isn't constructed yet
+// - if is_convex == 1, the polygon is convex
+// - if is_convex == -1, the polygon isn't convex and can't become convex
 
 void P_init(Polygon *p);
 // initialise un polygone (0 sommets)
@@ -49,7 +53,7 @@ void P_print(Polygon *P, char *message);
 int P_isConvex(Polygon *P);
 // Retourne 1 si le polygone donné en paramètre est convexe et 0 sinon.
 
-void  P_tournerAutourDeLAxeY(Polygon *P, double radians);
+void P_turnAroundY(Polygon *P, double radians); 
 // tourne tous les points de P d'un angle de radians
 // radians autour de l'axe Y.
 

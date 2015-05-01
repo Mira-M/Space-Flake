@@ -162,11 +162,16 @@ Vector V_rotate(Vector p, Vector centre, Vector v1, Vector v2){
 			);
 }
 
+Vector V_turnAroundY(Vector p, double r) {
+	
+	return V_new(p.x*cos(r) - p.z*sin(r), p.y, p.x*sin(r) + p.z*cos(r));
+}
+
 //------------------------------------------------
 // a des fin de debug
 
-void V_print(Vector v, char *message)
-{
+void V_print(Vector v, char *message) {
+	
 	fprintf(stderr,"%s : %f %f %f\n",message, v.x,v.y,v.z);
 }
 

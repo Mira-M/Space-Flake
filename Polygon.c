@@ -48,32 +48,32 @@ void P_draw(Polygon *P){
 
 	int i;
 	// Filled polygon
-	if (P->is_filled){
+	if (P->is_filled == 1){
 		if (P->nb_vertices < 3) glBegin(GL_LINES);
 		else {
 			glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 			glBegin(GL_POLYGON);
 		}
-		for (i=0; i < P->nb_vertices; i++) {
+		for (i = 0; i < P->nb_vertices; i++) {
 			glVertex3f(P->vertices[i].x, P->vertices[i].y, 0);
 		}
 	}
 	// Empty polygon
 	else {
 		// Closed polygon
-		if (P->is_closed) {
+		if (P->is_closed == 1) {
 			// Shouldn't happen if it is closed, duuuh
 			if (P->nb_vertices == 1) glBegin(GL_POINTS);
 			else glBegin(GL_LINE_LOOP);
-			for(i=0; i<P->nb_vertices; i++) {
+			for(i = 0; i < P->nb_vertices; i++) {
 				glVertex3f(P->vertices[i].x, P->vertices[i].y, 0);
 			} 
 		}
 		// Open polygon
 		else {
-			if (P->nb_vertices==1) glBegin(GL_POINTS);
+			if (P->nb_vertices == 1) glBegin(GL_POINTS);
 			else glBegin(GL_LINE_STRIP);
-			for (i=0 ; i<P->nb_vertices ; i++){
+			for (i = 0; i < P->nb_vertices; i++){
 				glVertex3f(P->vertices[i].x, P->vertices[i].y, 0);
 			} 
 		}	
@@ -83,7 +83,7 @@ void P_draw(Polygon *P){
 
 int P_isConvex(Polygon *P) {
 
-	if (P->nb_vertices < 3) return 0;
+	if ((P->nb_vertices < 3) || (P->is_convex == -1)) return 0;
 	if (P->nb_vertices == 3) {
 		P->is_convex = 1;
 		return 1;
@@ -117,13 +117,21 @@ int P_isConvex(Polygon *P) {
 		// u^v = w => (u,v,w) is direct, which implies that if
 		// z_sign*(x1*y2-y1*x2) < 0, the polygon isn't convex
 		if ((z_sign*(x1*y2-y1*x2)) < 0) {
-			P->is_convex = 0;
+			P->is_convex = -1;
 			return 0;
 		}
 	}
 
 	P->is_convex = 1;
 	return 1;
+}
+
+void P_turnAroundY(Polygon *P, double radians) {
+	
+	int i;
+	for (i = 0; i < P->nb_vertices; i++){
+		P->vertices[i] = V_turnAroundY(P->vertices[i], radians);
+	}
 }
 
 Vector P_center(Polygon *P) {
@@ -179,5 +187,11 @@ void P_translate(Polygon *P, Vector trans) {
 
 void P_rotate(Polygon *P, Vector normal) {
 	
+	Vector v_p = P_center(P);
+	Vector v_n = P_normal(P);
+	int i;
 	
+	for(i = 0; i < P->nb_vertices; i++) {
+		P->vertices[i] = V_rotate(P->vertices[i], v_p, v_n, normal);
+	}
 }
