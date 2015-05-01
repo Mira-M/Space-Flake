@@ -51,6 +51,12 @@ int V_isOnTheRight(Vector M, Vector A, Vector B);
 int checkPrecision(double x, double y);
 // retourne 1 si x == y à EPSILON près, 0 sinon
 
+int isZero(double x);
+// retourne 1 si x == 0 à EPSILON près, 0 sinon
+
+int V_isNull(Vector v);
+// retourne 1 si le vecteur v est nul à EPSILON près, 0 sinon
+
 int V_areCoplanar(Vector A, Vector B, Vector C, Vector D);
 // retourne 1 si A, B, C et D sont coplanaires, 0 sinon
 

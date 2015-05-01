@@ -61,7 +61,18 @@ int V_isOnTheRight(Vector M, Vector A, Vector B) {
 
 int checkPrecision(double x, double y) {
 
-	return ((x-y < EPSILON) && (x-y > -EPSILON)) ? 1 : 0;
+	int tmp = x-y;
+	return ((tmp < EPSILON) && (tmp > -EPSILON)) ? 1 : 0;
+}
+
+int isZero(double x) {
+
+	return ((x < EPSILON) && (x > -EPSILON)) ? 1 : 0;
+}
+
+int V_isNull(Vector v) {
+
+	return (isZero(v.x) && isZero(v.y) && isZero(v.z)) ? 1 : 0;
 }
 
 int V_areCoplanar(Vector A, Vector B, Vector C, Vector D) {
