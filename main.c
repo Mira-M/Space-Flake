@@ -101,14 +101,15 @@ void mouse(int button, int state, int x, int y) {
 	switch(button) {
 		case GLUT_LEFT_BUTTON:
 			if(state == GLUT_DOWN) {
-				float h_width = (float)width/2;
-				float h_height = (float)height/2;
-				float x_coord = (x - h_width)/h_width;
-				float y_coord = (h_height - y)/h_height ;
-	
-				P_addVertex(&P, V_new(x_coord, y_coord, 0));
-				P_isConvex(&P);
-				glutPostRedisplay();
+				if (!P.is_closed) {
+					float h_width = (float)width/2;
+					float h_height = (float)height/2;
+					float x_coord = (x - h_width)/h_width;
+					float y_coord = (h_height - y)/h_height ;
+					P_addVertex(&P, V_new(x_coord, y_coord, 0));
+					P_isConvex(&P);
+					glutPostRedisplay();
+				}
 			}
 			break;
 
