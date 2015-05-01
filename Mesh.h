@@ -1,10 +1,9 @@
-
-/*======================================================*\
-  Wednesday September the 25th 2013
-  Arash HABIBI
-  Mesh.h
-\*======================================================*/
-
+/**
+ * \file Mesh.c
+ * \brief Function headers related to meshes
+ * \author Benjamin Chetioui
+ */
+ 
 #ifndef __MESH_H__
 #define __MESH_H__
 
@@ -19,20 +18,18 @@
 
 #define M_MAX_QUADS 5000
 
-typedef struct
-{
-	Vector _vertices[4];
+typedef struct {
+	Vector vertices[4];
 } Quad;
 
 Quad Q_new(Vector v1, Vector v2, Vector v3, Vector v4);
 
 //--------------------------------------------
 
-typedef struct
-{
-	int _nb_quads;
-	Quad _quads[M_MAX_QUADS];
-	int _is_filled;
+typedef struct {
+	int nb_quads;
+	Quad quads[M_MAX_QUADS];
+	int is_filled;
 	// int _is_smooth;
 } Mesh;
 
