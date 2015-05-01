@@ -53,4 +53,19 @@ void  P_tournerAutourDeLAxeY(Polygon *P, double radians);
 // tourne tous les points de P d'un angle de radians
 // radians autour de l'axe Y.
 
+Vector P_center(Polygon *P);
+// Cette fonction retourne le centre d'un polygone plan, c'est-à-dire
+// la moyenne des positions de ses points.
+
+Vector P_normal(Polygon *P);
+// On suppose que P est un polygone plan. Cette fonction retourne
+// un vecteur unitaire normal à ce polygone
+
+void P_translate(Polygon *P, Vector trans);
+// Translate tous les sommets de P d'un vecteur trans.
+
+void P_rotate(Polygon *P, Vector normal);
+// Faire tourner le polygone plan P autour de son centre de façon à
+// ce que son vecteur normal soit égal à normal. (Cf fonction V_rotate)
+
 #endif // __POLYGON_H__
