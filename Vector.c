@@ -168,7 +168,7 @@ Vector V_turnAroundY(Vector p, double r) {
 }
 
 //------------------------------------------------
-// a des fin de debug
+// à des fins de debug
 
 void V_print(Vector v, char *message) {
 	

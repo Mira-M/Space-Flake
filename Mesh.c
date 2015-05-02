@@ -133,8 +133,7 @@ void M_perlinExtrude(Mesh *M, Polygon *P, int nb_slices) {
 		prln_noise = PRLN_vectorNoise(P_center(&p1));
 		P_translate(&p2, prln_noise);
 		P_rotate(&p2, prln_noise);
-		M_addSlice(M , &p1 , &p2);
+		if (i) M_addSlice(M , &p1 , &p2);
 		P_copy(&p2, &p1);
 	}
 }
-

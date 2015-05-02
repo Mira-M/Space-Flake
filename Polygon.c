@@ -188,7 +188,7 @@ void P_translate(Polygon *P, Vector trans) {
 void P_rotate(Polygon *P, Vector normal) {
 	
 	Vector v_p = P_center(P);
-	Vector v_n = V_unit(P_normal(P));
+	Vector v_n = P_normal(P);
 	normal = V_unit(normal);
 	int i;
 	
