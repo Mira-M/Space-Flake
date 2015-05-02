@@ -17,13 +17,20 @@
 #define WIREFRAME 0
 #define FLAT      1
 #define SHADE     2
+
+#define E_SLICING 100
+#define R_SLICING 100
+
 int draw = WIREFRAME;
 
 /* dimensions de la fenetre */
 int width = 600;
 int height = 600;
 
+// r_switch == 0 => input possible
 int r_switch = 0;
+// mode == 0 => Extrusion, else Revolution
+int mode = 0;
 
 Mesh M;
 
@@ -147,6 +154,21 @@ void keyboard(unsigned char keycode, int x, int y)
 	
 	if (keycode=='c') P.is_closed = !P.is_closed;
 
+	if (keycode=='m') {
+		mode = !mode;
+		if (r_switch == 1) {
+			M_init(&M);
+			if (mode == 0) {
+				P.is_closed = 1;
+				M_perlinExtrude(&M, &P, E_SLICING);
+			}
+			else {
+				P.is_closed = 0;
+				M_revolution(&M, &P, R_SLICING);
+			}
+		}
+	}
+
 	glutPostRedisplay();
 }
 
@@ -197,13 +219,14 @@ void mouse(int button, int state, int x, int y) {
 		case GLUT_MIDDLE_BUTTON:
 			if(state == GLUT_DOWN) {
 				if (!r_switch) {
-					P.is_closed = 1;
+					if (mode == 0) {
+						P.is_closed = 1;
+						M_perlinExtrude(&M, &P, E_SLICING);
+					}
+					else {
+						M_revolution(&M, &P, R_SLICING);
+					}
 					r_switch = 1;
-					//M_revolution(&M, &P, 16);
-					//Vector trans = V_new(2, 2, 2);
-					//P_translate(&P, trans);
-					M_perlinExtrude(&M, &P, 100);
-					//M_print(&M, "Bite");
 					glutPostRedisplay();
 				}
 			}
