@@ -101,7 +101,7 @@ double V_length(Vector v) {
 
 Vector V_unit(Vector v){
 
-	return V_multiply(1/V_length(v), v);
+	return V_multiply(1.0/V_length(v), v);
 }
 
 double V_decompose(Vector p, Vector u) {
@@ -133,7 +133,7 @@ void V_uxUyFromUz(Vector u_z, Vector *u_x, Vector *u_y) {
 	}
 }
 
-Vector V_rotate(Vector p, Vector centre, Vector v1, Vector v2){
+Vector V_rotate(Vector p, Vector centre, Vector v1, Vector v2) {
 
 	// Now rotating around (0, 0, 0)
 	p = V_substract(p, centre);

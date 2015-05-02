@@ -143,7 +143,7 @@ Vector P_center(Polygon *P) {
 	for(i = 1; i < P->nb_vertices; i++) {
 		result = V_add(result, P->vertices[i]);
 	}
-	return V_multiply(1/P->nb_vertices, result);
+	return V_multiply(1./P->nb_vertices, result);
 }
 
 Vector P_normal(Polygon *P) {
@@ -188,7 +188,8 @@ void P_translate(Polygon *P, Vector trans) {
 void P_rotate(Polygon *P, Vector normal) {
 	
 	Vector v_p = P_center(P);
-	Vector v_n = P_normal(P);
+	Vector v_n = V_unit(P_normal(P));
+	normal = V_unit(normal);
 	int i;
 	
 	for(i = 0; i < P->nb_vertices; i++) {

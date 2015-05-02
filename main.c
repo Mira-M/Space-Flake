@@ -81,8 +81,9 @@ void display()
 	if (!r_switch)
 		glOrtho(-1,1,-1,1,-1,1);
 	else {
-		gluPerspective( 40, (float)width/height, 1, 100);
-		// Pour tourner autour de l'objet
+		gluPerspective( 30, (float)width/height, 1, 100);
+		gluLookAt(0, 0, 8, 0, 0, 0, 0, 1, 0);
+		//gluLookAt(2,2,4,0,0,0,0,1,0);
 		glTranslatef(p_aim.x,p_aim.y,p_aim.z);
 		glRotatef(theta,1,0,0);
 		glRotatef(phi,0,1,0);
@@ -198,7 +199,9 @@ void mouse(int button, int state, int x, int y) {
 			if(state == GLUT_DOWN){
 				P.is_closed = 1;
 				r_switch = 1;
-				M_revolution(&M, &P, 16);
+				//M_revolution(&M, &P, 16);
+				M_perlinExtrude(&M, &P, 100);
+				//M_print(&M, "Bite");
 				glutPostRedisplay();
 			}
 			break;

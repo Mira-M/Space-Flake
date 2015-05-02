@@ -89,7 +89,7 @@ void M_addSlice(Mesh *M, Polygon *P1, Polygon *P2) {
 
 	int i, rank;
 	int sup = P1->nb_vertices;
-	if ((P1->is_closed) && (P2->is_closed)) sup -= 1;
+	if ((!P1->is_closed) || (!P2->is_closed)) sup -= 1;
 	
 	for(i = 0; i < sup; i++) {
 		rank = (i+1)%P1->nb_vertices;
@@ -114,9 +114,44 @@ void M_revolution(Mesh *M, Polygon *P, int nb_tranches) {
 	P_copy(P, &p1);
 	P_copy(P, &p2);
 
-	for (i = 0; i < nb_tranches; i++) {
+	for(i = 0; i < nb_tranches; i++) {
 		P_turnAroundY(&p2, radians);
 		M_addSlice(M, &p1, &p2);
 		P_copy(&p2, &p1);
 	}
 }
+
+/*
+void M_perlinExtrude(Mesh *M, Polygon *P, int nb_slices) {
+	
+	int i;
+	Vector prln_noise;
+	Polygon p1, p2;
+	P_copy(P, &p1);
+	P_copy(P, &p2);
+	
+	for(i = 0; i < nb_slices; i++) {
+		prln_noise = PRLN_vectorNoise(P_center(&p1));
+		P_translate(&p2, prln_noise);
+		P_rotate(&p2, prln_noise);
+		M_addSlice(M , &p1 , &p2);
+		P_copy(&p2, &p1);
+	}
+}*/
+
+void M_perlinExtrude(Mesh *M, Polygon *P, int nb_slices){
+	int i ;
+	Vector noise_p ;
+	Polygon plg ;
+
+	for (i = 0; i < nb_slices; i++)
+	{
+		noise_p = PRLN_vectorNoise( P_center( P ) ) ;
+		P_copy( P , &plg ) ;
+		P_translate( P , noise_p );
+		P_rotate( P , noise_p ) ;
+		M_addSlice( M , &plg , P) ;
+	}
+}
+
+

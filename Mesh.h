@@ -57,7 +57,7 @@ void M_revolution(Mesh *M, Polygon *P, int nb_tranches);
 // nb_tranches angles et ajoute à M les quads nécessaires pour
 // réaliser une révolution de P autour de l'axe Y (cf figure 1).
 
-void M_perlinExtrude(Mesh *M, Polygon *p, int nb_slices);
+void M_perlinExtrude(Mesh *M, Polygon *P, int nb_slices);
 // Extrusion
 
 #endif // __MESH_H__
