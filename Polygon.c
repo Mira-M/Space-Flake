@@ -171,7 +171,7 @@ Vector P_normal(Polygon *P) {
 		// In this particular use case, V_res == (0,0,0) implies that the points
 		// are aligned.
 		if (!V_isNull(V_res))
-			return V_res;
+			return V_unit(V_res);
 	}
 
 	return V_new(0, 0, 0);
