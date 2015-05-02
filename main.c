@@ -22,6 +22,7 @@ int draw = WIREFRAME;
 /* dimensions de la fenetre */
 int width = 600;
 int height = 600;
+
 int r_switch = 0;
 
 Mesh M;
@@ -82,7 +83,7 @@ void display()
 		glOrtho(-1,1,-1,1,-1,1);
 	else {
 		gluPerspective( 30, (float)width/height, 1, 100);
-		gluLookAt(0, 0, 8, 0, 0, 0, 0, 1, 0);
+		gluLookAt(-1, -1, 8, 0, 0, 0, 0, 1, 0);
 		//gluLookAt(2,2,4,0,0,0,0,1,0);
 		glTranslatef(p_aim.x,p_aim.y,p_aim.z);
 		glRotatef(theta,1,0,0);
@@ -143,6 +144,8 @@ void keyboard(unsigned char keycode, int x, int y)
 			glDisable(GL_DEPTH_TEST);
 			break;
 		}
+	
+	if (keycode=='c') P.is_closed = !P.is_closed;
 
 	glutPostRedisplay();
 }
@@ -179,7 +182,7 @@ void mouse(int button, int state, int x, int y) {
 	switch(button) {
 		case GLUT_LEFT_BUTTON:
 			if(state == GLUT_DOWN) {
-				if (!P.is_closed) {
+				if (!r_switch) {
 					float h_width = (float)width/2;
 					float h_height = (float)height/2;
 					float x_coord = (x - h_width)/h_width;
@@ -192,17 +195,22 @@ void mouse(int button, int state, int x, int y) {
 			break;
 
 		case GLUT_MIDDLE_BUTTON:
-			if(state == GLUT_DOWN)
+			if(state == GLUT_DOWN) {
+				if (!r_switch) {
+					P.is_closed = 1;
+					r_switch = 1;
+					//M_revolution(&M, &P, 16);
+					//Vector trans = V_new(2, 2, 2);
+					//P_translate(&P, trans);
+					M_perlinExtrude(&M, &P, 100);
+					//M_print(&M, "Bite");
+					glutPostRedisplay();
+				}
+			}
 			break;
 
 		case GLUT_RIGHT_BUTTON:
 			if(state == GLUT_DOWN){
-				P.is_closed = 1;
-				r_switch = 1;
-				//M_revolution(&M, &P, 16);
-				M_perlinExtrude(&M, &P, 5000);
-				//M_print(&M, "Bite");
-				glutPostRedisplay();
 			}
 			break;
 	}

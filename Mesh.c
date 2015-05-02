@@ -121,7 +121,6 @@ void M_revolution(Mesh *M, Polygon *P, int nb_tranches) {
 	}
 }
 
-/*
 void M_perlinExtrude(Mesh *M, Polygon *P, int nb_slices) {
 	
 	int i;
@@ -137,21 +136,5 @@ void M_perlinExtrude(Mesh *M, Polygon *P, int nb_slices) {
 		M_addSlice(M , &p1 , &p2);
 		P_copy(&p2, &p1);
 	}
-}*/
-
-void M_perlinExtrude(Mesh *M, Polygon *P, int nb_slices){
-	int i ;
-	Vector noise_p ;
-	Polygon plg ;
-
-	for (i = 0; i < nb_slices; i++)
-	{
-		noise_p = PRLN_vectorNoise( P_center( P ) ) ;
-		P_copy( P , &plg ) ;
-		P_translate( P , noise_p );
-		P_rotate( P , noise_p ) ;
-		M_addSlice( M , &plg , P) ;
-	}
 }
-
 
