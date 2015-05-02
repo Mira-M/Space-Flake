@@ -200,7 +200,7 @@ void mouse(int button, int state, int x, int y) {
 				P.is_closed = 1;
 				r_switch = 1;
 				//M_revolution(&M, &P, 16);
-				M_perlinExtrude(&M, &P, 100);
+				M_perlinExtrude(&M, &P, 5000);
 				//M_print(&M, "Bite");
 				glutPostRedisplay();
 			}
