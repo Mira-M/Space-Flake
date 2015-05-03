@@ -123,7 +123,7 @@ void display()
 
 void keyboard(unsigned char keycode, int x, int y)
 {
-	printf("Touche frapee : %c (code ascii %d)\n",keycode, keycode);
+	printf("Touche frappee : %c (code ascii %d)\n",keycode, keycode);
 	/* touche ECHAP */
 	if (keycode==27)
 		exit(0);
