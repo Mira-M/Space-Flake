@@ -22,11 +22,15 @@ typedef struct
 	int is_closed;
 	int is_filled;
 	int is_convex;
+	int rank_convex;
 } Polygon;
 // is_convex can take 3 values :
 // - if is_convex == 0, the polygon isn't constructed yet
 // - if is_convex == 1, the polygon is convex
 // - if is_convex == -1, the polygon isn't convex and can't become convex
+//
+// rank_convex holds the number of vertices the polygon had when it couldn't
+// become convex anymore.
 
 void P_init(Polygon *p);
 // initialise un polygone (0 sommets)

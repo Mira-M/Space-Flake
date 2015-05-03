@@ -101,7 +101,7 @@ double V_length(Vector v) {
 
 Vector V_unit(Vector v){
 
-	return V_multiply(1/V_length(v), v);
+	return V_multiply(1./V_length(v), v);
 }
 
 double V_decompose(Vector p, Vector u) {

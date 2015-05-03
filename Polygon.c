@@ -12,6 +12,7 @@ void P_init(Polygon *p) {
 	p->is_closed = 0;
 	p->is_filled = 0;
 	p->is_convex = 0;
+	p->rank_convex = 0;
 }
 
 void P_copy(Polygon *original, Polygon *copie) {
@@ -83,12 +84,17 @@ void P_draw(Polygon *P){
 
 int P_isConvex(Polygon *P) {
 
-	if ((P->nb_vertices < 3) || (P->is_convex == -1)) return 0;
+	if ((P->nb_vertices < 3) ||
+			((P->is_convex == -1) && (P->rank_convex < P->nb_vertices))) {
+		P->is_convex = 0;
+		return 0;
+	}
 	if (P->nb_vertices == 3) {
 		P->is_convex = 1;
 		return 1;
 	}
 
+	P->is_convex = 0;
 	// x and y coordinates of the vector between 
 	// P->vertices[0] and P->vertices[1]
 	double x1 = P->vertices[1].x-P->vertices[0].x;
@@ -118,6 +124,7 @@ int P_isConvex(Polygon *P) {
 		// z_sign*(x1*y2-y1*x2) < 0, the polygon isn't convex
 		if ((z_sign*(x1*y2-y1*x2)) < 0) {
 			P->is_convex = -1;
+			P->rank_convex = P->nb_vertices;
 			return 0;
 		}
 	}

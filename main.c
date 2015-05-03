@@ -233,7 +233,12 @@ void mouse(int button, int state, int x, int y) {
 			break;
 
 		case GLUT_RIGHT_BUTTON:
-			if(state == GLUT_DOWN){
+			if(state == GLUT_DOWN) {
+				if (!r_switch) {
+					P_removeLastVertex(&P);
+					P_isConvex(&P);
+					glutPostRedisplay();
+				}
 			}
 			break;
 	}
