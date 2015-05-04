@@ -14,3 +14,4 @@ Getting lost in space
 		directional keys       : rotate in space ~~
 		Ctrl+<directional_key> : translate the axis
 		m                      : change mode (revolution/extrusion)
+		r                      : reset

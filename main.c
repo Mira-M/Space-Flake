@@ -169,6 +169,13 @@ void keyboard(unsigned char keycode, int x, int y)
 		}
 	}
 
+	if (keycode == 'r') {
+		M_init(&M);
+		P_init(&P);
+		r_switch = 0;
+		mode = 0;
+	}
+
 	glutPostRedisplay();
 }
 
